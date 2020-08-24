@@ -1,8 +1,58 @@
-﻿html {
+﻿body {
+    display: grid;
+}
+
+
+/*
+main {
     background-image: url('../images/movieBackground.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size:cover;
     background-color: forestgreen;
+    
+}*/
+
+.header {
+    background-color: forestgreen;
+}
+
+nav {
+    background-color: red;
+}
+
+main {
+    background-color:yellow;
+}
+
+footer {
+    background-color: aqua
+}
+
+h1 {
+    text-transform:uppercase;
+    text-shadow: 2px 2px forestgreen;
+}
+
+/* Gallery CSS source: https://www.w3schools.com/css/css_image_gallery.asp */
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
 }
