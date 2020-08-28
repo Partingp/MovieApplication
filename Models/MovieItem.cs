@@ -8,6 +8,9 @@ namespace MovieApplication.Models
 {
     public class MovieItem
     {
+        
+        public int Id { get; } 
+        
         public string Title { get; set; }
         
         public DateTime ReleaseDate { get; set; }

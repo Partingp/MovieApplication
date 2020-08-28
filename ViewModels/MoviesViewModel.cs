@@ -15,11 +15,11 @@ namespace MovieApplication.ViewModels
         {
             using (var db = DbHelper.GetConnection())
             {
-                this.TodoItems = db.Query<MovieItem>("SELECT * FROM Movies ORDER BY AddDate DESC").ToList();
+                this.MovieItems = db.Query<MovieItem>("SELECT * FROM Movies ORDER BY ReleaseDate DESC").ToList();
             }
         }
 
-        public List<MovieItem> TodoItems { get; set; }
+        public List<MovieItem> MovieItems { get; set; }
     }
 }
 

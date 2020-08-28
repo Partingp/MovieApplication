@@ -26,37 +26,35 @@
         <p>filter and sort</p>
     </nav>
     <main>
-            
-        <!--Template delegate for repeatable markup-->
+        @{ 
+            var rowCount = 0;
+            var loopCount = 0;
+        }
         <div id="movieBrowse" class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-4">
+            @foreach (var item in Model.MovieItems)
+            {
+                <!--New row-->
+                @if (loopCount % 3 == 0)
+                {
+                    @:<div class="row">
+                }
+                        <div class="col-sm-3">
                             <div class="thumbnail">
-                                <img id="posters" src="../images/HPPOA.jpg" alt="Harry Potter and the Prisoner of Azkaban">
+                                <img id="posters" src="../images/@item.Poster" alt="@item.Title">
                             </div>
-                            <div class="caption">Harry Potter and the Prisoner of Azkaban</div>
-                    </div>
-                    <div class="col-sm-4">
-                            <div class="thumbnail">
-                                <img id="posters" src="../images/inception.jpg" alt="Inception movie poster">
-                            </div>
-                            <div class="caption">Inception</div>
-                    </div>
-                    <div class="col-sm-4">
-                            <div class="thumbnail">
-                                <img id="posters" src="../images/jurassicPark25.jpg" alt="Jurassic Park 25th anniversary movie poster">
-                            </div>
-                            <div class="caption">Jurassic park 25th anniversary</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <img id="posters" src="../images/onward.jpg" alt="Onward movie poster">
+                            <div class="caption">@item.Title</div>
                         </div>
-                        <div class="caption">Onward</div>
-                    </div>
-                </div>
+
+                <!--End row-->
+                @if (loopCount == (3+(4*rowCount)))
+                {
+                     @:</div>
+                     rowCount++;
+                }
+                loopCount++;
+            }
+
+            
         </div>
     </main>
     <footer>

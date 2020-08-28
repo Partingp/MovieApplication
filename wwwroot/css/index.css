@@ -18,6 +18,10 @@ main {
     background-color: forestgreen;
 }
 
+.row{
+    background-color:pink;
+}
+
 .thumbnail {
     max-width:300px;
 }
