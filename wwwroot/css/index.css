@@ -18,22 +18,9 @@ main {
     background-color: forestgreen;
 }
 
-.row{
-    background-color:pink;
-}
-
-.thumbnail {
-    max-width:300px;
-}
-
-#posters {
-    width:100%;
-    height:400px;
-
-}
-
-nav {
-    background-color: red;
+.img-fluid{
+    max-width:100%;
+    height:auto;
 }
 
 main {
