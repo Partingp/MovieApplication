@@ -2,20 +2,12 @@
     display: grid;
 }
 
-
-/*
-main {
-    background-image: url('../images/movieBackground.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size:cover;
-    background-color: forestgreen;
-    
-}*/
-
 .header {
     background-color: forestgreen;
+}
+
+#login {
+    width:30%;
 }
 
 .img-fluid{
