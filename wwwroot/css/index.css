@@ -19,6 +19,10 @@ main {
     background-color:yellow;
 }
 
+#movieContent{
+    background-color:black;
+}
+
 footer {
     background-color: aqua;
 }
@@ -26,4 +30,9 @@ footer {
 h1 {
     text-transform:uppercase;
     text-shadow: 2px 2px forestgreen;
+}
+
+#movieInfo{
+    display:none;
+    background-color: darkgrey;
 }

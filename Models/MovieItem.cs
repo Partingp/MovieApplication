@@ -28,5 +28,7 @@ namespace MovieApplication.Models
 
         public string Poster { get; set; }
 
+        public string Synopsis { get; set; }
+
     }
 }

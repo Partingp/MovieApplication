@@ -11,7 +11,7 @@
     <title>Uve Cinema</title>
     <link href="~/CSS/index.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="~/javascript/script.js"></script>
@@ -75,11 +75,11 @@
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter password">
                 </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" id="showPassword" type="checkbox"> Show Password
+                        <input class="form-check-input" id="loginShowPassword" type="checkbox"> Show Password
                     </label>
                 </div>
                 <div class="form-group form-check">
@@ -112,7 +112,7 @@
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    <input type="password" class="form-control" id="registerPassword" placeholder="Enter password">
                 </div>
                 <div class="form-group">
                     <label for="dateOfBirth">Date of birth:</label>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" id="showPassword" type="checkbox"> Show Password
+                        <input class="form-check-input" id="registerShowPassword" type="checkbox"> Show Password
                     </label>
                 </div>
                 <div class="form-group form-check">
@@ -136,35 +136,45 @@
 
     </nav>
     <main>
-        <!--Movie content-->
-        @{ 
-            var rowCount = 0;
-            var loopCount = 0;
-        }
-        <div id="movieBrowse" class="container-fluid">
-            @foreach (var item in Model.MovieItems)
-            {
-                
-                @if (loopCount % 4 == 0)
-                {
-                    <!--New row-->
-                    @:<div class="row">
+        <div id="movieContent" class="container-fluid p-0">
+            <div class="row no-gutters">
+
+                <!--Movie content-->
+                @{
+                    var rowCount = 0;
+                    var loopCount = 0;
                 }
+                <div id="movieBrowse" class="container-fluid col-sm-12 order-1 p-1">
+                    @foreach (var item in Model.MovieItems)
+                    {
+
+                        @if (loopCount % 4 == 0)
+                        {
+                            <!--New row-->
+                            @:<div class="row no-gutters">
+                        }
                         <div class="col-sm-3">
-                                <img id="posters" class="img-fluid" src="../images/@item.Poster" alt="@item.Title">
+                            <img id="posters" class="img-fluid border" src="../images/@item.Poster" alt="@item.Title">
                             <div class="caption">@item.Title</div>
                         </div>
 
-               
-                @if (loopCount == (3+(4*rowCount)))
-                {   <!--End row-->
-                     @:</div>
-                     rowCount++;
-                }
-                loopCount++;
-            }
+
+                        @if (loopCount == (3 + (4 * rowCount)))
+                        {<!--End row-->
+                        @:</div>
+                        rowCount++;
+                    }
+                        loopCount++;
+                    }
+                </div>
+
+                <!--Movie information-->
+                <div id="movieInfo" class="container-fluid col-sm-3 p-1">
+
+                </div>
+            </div>
         </div>
-    </main>
+</main>
     <footer>
 
     </footer>
