@@ -1,0 +1,28 @@
+﻿<!--Movie content-->
+@{
+    var rowCount = 0;
+    var loopCount = 0;
+}
+
+
+@foreach (var item in Model.MovieItems)
+{
+
+    @if (loopCount % 4 == 0)
+    {
+        <!--New row-->
+        @:<div class="row no-gutters">
+    }
+    <div class="col-sm-3">
+        <img class="poster img-fluid border" src="../images/@item.Poster" alt="@item.Title">
+        <div class="caption">@item.Title</div>
+    </div>
+
+
+    @if (loopCount == (3 + (4 * rowCount)))
+    {   <!--End row-->
+        @:</div>
+        rowCount++;
+    }
+    loopCount++;
+}

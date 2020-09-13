@@ -19,6 +19,17 @@ namespace MovieApplication.ViewModels
             }
         }
 
+        public void getFilteredMovies(string filters)
+        {
+            using (var db = DbHelper.GetConnection())
+            {
+                string sql = "SELECT * FROM Movies WHERE Title IN (SELECT Title FROM MovieTags WHERE Tag IN @Filters) ORDER BY ReleaseDate DESC";
+                //var parameters = new {Filters = new[] { filters } };
+                var parameters = new {Filters = filters.Split(',') };
+                this.MovieItems = db.Query<MovieItem>(sql, parameters).ToList();
+            }
+        }
+
         public List<MovieItem> MovieItems { get; set; }
     }
 }

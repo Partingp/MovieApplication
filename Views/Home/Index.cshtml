@@ -34,16 +34,16 @@
         <div id="filters" class="collapse">
             <h4>Filter by Screening Type</h4>
             <div class="btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-outline-dark ">
+                <label id="3D" class="btn btn-outline-dark ">
                     <input type="checkbox" autocomplete="off"> 3D
                 </label>
-                <label class="btn btn-outline-dark">
+                <label id="2D" class="btn btn-outline-dark">
                     <input type="checkbox" autocomplete="off"> 2D
                 </label>
-                <label class="btn btn-outline-dark ">
+                <label id="4K" class="btn btn-outline-dark ">
                     <input type="checkbox" autocomplete="off"> 4K
                 </label>
-                <label class="btn btn-outline-dark ">
+                <label id="Audio Description" class="btn btn-outline-dark ">
                     <input type="checkbox" autocomplete="off"> Audio Description (AD)
                 </label>
             </div>
@@ -51,16 +51,16 @@
 
             <h4>Filter by Genre</h4>
             <div class="btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-outline-dark ">
+                <label id="Comedy" class="btn btn-outline-dark ">
                     <input type="checkbox" autocomplete="off"> Comedy
                 </label>
-                <label class="btn btn-outline-dark">
+                <label id="Documentary" class="btn btn-outline-dark">
                     <input type="checkbox" autocomplete="off"> Documentary
                 </label>
-                <label class="btn btn-outline-dark ">
+                <label id="Sci-Fi" class="btn btn-outline-dark ">
                     <input type="checkbox" autocomplete="off"> Sci-Fi
                 </label>
-                <label class="btn btn-outline-dark ">
+                <label id="Thriller" class="btn btn-outline-dark ">
                     <input type="checkbox" autocomplete="off"> Thriller
                 </label>
             </div>
@@ -139,33 +139,9 @@
         <div id="movieContent" class="container-fluid p-0">
             <div class="row no-gutters">
 
-                <!--Movie content-->
-                @{
-                    var rowCount = 0;
-                    var loopCount = 0;
-                }
+
                 <div id="movieBrowse" class="container-fluid col-sm-12 order-1 p-1">
-                    @foreach (var item in Model.MovieItems)
-                    {
-
-                        @if (loopCount % 4 == 0)
-                        {
-                            <!--New row-->
-                            @:<div class="row no-gutters">
-                        }
-                        <div class="col-sm-3">
-                            <img id="posters" class="img-fluid border" src="../images/@item.Poster" alt="@item.Title">
-                            <div class="caption">@item.Title</div>
-                        </div>
-
-
-                        @if (loopCount == (3 + (4 * rowCount)))
-                        {<!--End row-->
-                        @:</div>
-                        rowCount++;
-                    }
-                        loopCount++;
-                    }
+                 @await Html.PartialAsync("_MovieBrowse")
                 </div>
 
                 <!--Movie information-->

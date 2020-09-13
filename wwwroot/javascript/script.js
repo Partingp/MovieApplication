@@ -16,28 +16,35 @@
         $("#login").collapse("hide");
     });
 
-    $("#movieInfo").click(function () {
+    $(document).on("click", '#movieInfo', function () {
+        hideMovieInfo();
+    });
+ 
+    var displayedPosterInfo = null;
+    $(document).on("click", '.poster', function () {
+        if ($("#movieInfo").is(":visible")) {
+            $(".poster").removeClass("border-danger")
+        }
+        showMovieInfo(this);
+    });
+
+    function showMovieInfo(poster) {
+  
+        $("#movieInfo").show().addClass("col-sm-3");
+        $("#movieBrowse").removeClass("col-sm-12").addClass("col-sm-9");
+        $(poster).toggleClass("border-danger");
+        displayedPosterInfo = this;
+        getMovieInfo(poster.alt);
+        
+    }
+
+    function hideMovieInfo() {
         $("#movieInfo").hide().removeClass("col-sm-3");
         $("#movieBrowse").removeClass("col-sm-9").addClass("col-sm-12");
         $(".border").removeClass("border-danger");
-    });
- 
-    var posters = document.querySelectorAll("#posters");
-    var displayedPosterInfo = null;
-    for (var i = 0; i < posters.length; i++) {
-        posters[i].addEventListener("click", function () {
-            if ($("#movieInfo").is(":visible")) {
-                $(displayedPosterInfo).toggleClass("border-danger")
-            }
-            $("#movieInfo").show().addClass("col-sm-3");
-            $("#movieBrowse").removeClass("col-sm-12").addClass("col-sm-9");
-            $(this).toggleClass("border-danger");
-            displayedPosterInfo = this;
-            displayMovieInfo(this.alt);
-        });
     }
 
-    function displayMovieInfo(title) {
+    function getMovieInfo(title) {
         $.ajax({
             url: 'movie/' + title,
             data: { title: title }
@@ -65,6 +72,26 @@
             }
         });
     }
+
+
+    //Filtering of movies
+    //const filters = document.querySelectorAll("#filters input[type='checkbox']");
+    const filters = document.querySelectorAll("#filters label");
+    for (var i = 0; i < filters.length; i++) {
+        filters[i].addEventListener('click', toggleFilter);
+    }
+
+    function toggleFilter(e) {
+        $.ajax({
+            url: 'movie/filterMovies',
+            data: { filter: this.id }
+        }).done(function (partialViewResult) {
+            $("#movieBrowse").html(partialViewResult);
+        });
+    }
+
+
+
 
  
 });

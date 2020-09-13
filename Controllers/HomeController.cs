@@ -11,16 +11,18 @@ namespace MovieApplication.Controllers
 {
     public class HomeController : Controller
     {
+        public static HashSet<string> filters = new HashSet<string>();
+
         public IActionResult Index()
         {
             MoviesViewModel viewModel = new MoviesViewModel();
+
             return View(viewModel);
         }
 
         [Route("movie/{slug}")]
-        public IActionResult getMovieInfo(String title)
+        public IActionResult getMovieInfo(string title)
         {
-           
             MoviesViewModel viewModel = new MoviesViewModel();
             MovieApplication.Models.MovieItem movieInfo = null;
 
@@ -32,6 +34,39 @@ namespace MovieApplication.Controllers
             }
 
             return PartialView("_MovieInfo");
+        }
+
+
+        [Route("movie/filterMovies")]
+        public IActionResult filterMovies (string filter,MoviesViewModel viewModel)
+        {
+            //MoviesViewModel viewModel = new MoviesViewModel();
+            
+            //Add/Remove filter
+            if(!filters.Add(filter))
+            {
+                filters.Remove(filter);
+            }
+
+            //Generate CSV string of filters
+            string enabledFilters = "";
+            foreach(string f in filters){
+                enabledFilters += f+',';
+            }
+            enabledFilters = enabledFilters.TrimEnd(',');
+
+            if (String.IsNullOrEmpty(enabledFilters))
+            {
+                //viewModel = new MoviesViewModel();
+                return PartialView("_MovieBrowse", new MoviesViewModel());
+            }
+            else
+            {
+                viewModel.getFilteredMovies(enabledFilters);
+                return PartialView("_MovieBrowse",viewModel);
+            }
+            
+
         }
     }
 }
