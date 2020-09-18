@@ -15,7 +15,9 @@ namespace MovieApplication.Controllers
 
         public IActionResult Index()
         {
-            MoviesViewModel viewModel = new MoviesViewModel();
+            IndexCommonViewModel viewModel = new IndexCommonViewModel();
+            viewModel.MoviesVM = new MoviesViewModel();
+            viewModel.RegisterVM = new RegisterViewModel();
 
             return View(viewModel);
         }
@@ -26,11 +28,11 @@ namespace MovieApplication.Controllers
             MoviesViewModel viewModel = new MoviesViewModel();
             MovieApplication.Models.MovieItem movieInfo = null;
 
-            if(viewModel.MovieItems.Exists(x => x.Title == title))
+            if (viewModel.MovieItems.Exists(x => x.Title == title))
             {
-               movieInfo = viewModel.MovieItems.Find(x => x.Title == title);
+                movieInfo = viewModel.MovieItems.Find(x => x.Title == title);
 
-               ViewBag.Synopsis = movieInfo.Synopsis;
+                ViewBag.Synopsis = movieInfo.Synopsis;
             }
 
             return PartialView("_MovieInfo");
@@ -38,34 +40,52 @@ namespace MovieApplication.Controllers
 
 
         [Route("movie/filterMovies")]
-        public IActionResult filterMovies (string filter,MoviesViewModel viewModel)
+        public IActionResult filterMovies(string filter, MoviesViewModel viewModel)
         {
-            //MoviesViewModel viewModel = new MoviesViewModel();
-            
+            IndexCommonViewModel commonViewModel = new IndexCommonViewModel();
+            commonViewModel.MoviesVM = viewModel;
+
             //Add/Remove filter
-            if(!filters.Add(filter))
+            if (!filters.Add(filter))
             {
                 filters.Remove(filter);
             }
 
             //Generate CSV string of filters
             string enabledFilters = "";
-            foreach(string f in filters){
-                enabledFilters += f+',';
+            foreach (string f in filters) {
+                enabledFilters += f + ',';
             }
             enabledFilters = enabledFilters.TrimEnd(',');
 
             if (String.IsNullOrEmpty(enabledFilters))
             {
-                //viewModel = new MoviesViewModel();
-                return PartialView("_MovieBrowse", new MoviesViewModel());
+                commonViewModel.MoviesVM = new MoviesViewModel();
+                return PartialView("_MovieBrowse", commonViewModel);
             }
             else
             {
                 viewModel.getFilteredMovies(enabledFilters);
-                return PartialView("_MovieBrowse",viewModel);
+                return PartialView("_MovieBrowse", commonViewModel);
             }
+
+        }
+
+        [HttpPost]
+        [Route("HomeController/submitForm")]
+        public IActionResult submitForm(IndexCommonViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int result = model.RegisterVM.addClient();
+                //return Content($"User {model.RegisterVM.FirstName} added!");
+            }
+                
+
+            model.MoviesVM = new MoviesViewModel();
+            return View("Index", model);
             
+               
 
         }
     }

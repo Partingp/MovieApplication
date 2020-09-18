@@ -89,11 +89,6 @@
             $("#movieBrowse").html(partialViewResult);
         });
     }
-
-
-
-
- 
 });
 
 

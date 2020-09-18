@@ -1,0 +1,46 @@
+﻿@using (var form = Html.BeginForm("submitForm", "HomeController", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterVM.FirstName)
+        @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "form-control", placeholder = "Enter first name" })
+        @Html.ValidationMessageFor(m => m.RegisterVM.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterVM.Surname)
+        @Html.TextBoxFor(m => m.RegisterVM.Surname, new { @class = "form-control", placeholder = "Enter surname" })
+        @Html.ValidationMessageFor(m => m.RegisterVM.Surname)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterVM.Email)
+        @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", placeholder = "Enter your email" })
+        @Html.ValidationMessageFor(m => m.RegisterVM.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterVM.ConfirmEmail)
+        @Html.TextBoxFor(m => m.RegisterVM.ConfirmEmail, new { @class = "form-control", placeholder = "Enter your email again" })
+        @Html.ValidationMessageFor(m => m.RegisterVM.ConfirmEmail)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterVM.Password)
+        @Html.TextBoxFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Enter your password" })
+        @Html.ValidationMessageFor(m => m.RegisterVM.Password)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterVM.DateOfBirth)
+        @Html.TextBoxFor(m => m.RegisterVM.DateOfBirth, new { @class = "form-control", placeholder = "Enter your date of birth", @type = "date" })
+        @Html.ValidationMessageFor(m => m.RegisterVM.DateOfBirth)
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" id="registerShowPassword" type="checkbox"> Show Password
+        </label>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" type="checkbox"> I agree to the non-existant terms of service
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
