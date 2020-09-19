@@ -77,7 +77,7 @@ namespace MovieApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                int result = model.RegisterVM.addClient();
+                int result = model.RegisterVM.AddClient();
                 //return Content($"User {model.RegisterVM.FirstName} added!");
             }
                 

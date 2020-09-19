@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MovieApplication.ViewModels
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : IValidatableObject
     {
 
         [Required]
@@ -42,18 +42,41 @@ namespace MovieApplication.ViewModels
         [Display(Name = "Date of Birth:")]
         public DateTime DateOfBirth { get; set; }
 
-        public int addClient()
+        public int CheckClientExists()
         {
-            var result = 0;
-            
             using (var db = DbHelper.GetConnection())
             {
                 //Check for duplicates entries
                 string sql = "SELECT * FROM Clients WHERE Email = @Email";
                 var parameters = new { Email = Email };
                 var duplicates = db.Query<Client>(sql, parameters).ToList();
+                return duplicates.Count;
+            }
 
-                if(duplicates.Count==0)
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            //DateOfBirth Validation
+            if (this.DateOfBirth.Year >= DateTime.Now.Year)
+                yield return new ValidationResult("I dont think you were born today or from the future", new[] { "DateOfBirth" });
+            if (this.DateOfBirth.Year < (DateTime.Now.Year-150))
+                yield return new ValidationResult("I dont think you are THAT old", new[] { "DateOfBirth" });
+            //Email Validation
+            if (!this.Email.Equals(this.ConfirmEmail))
+                yield return new ValidationResult("Make sure the emails match", new[] { "ConfirmEmail" });
+            if(CheckClientExists()>0)
+                yield return new ValidationResult("An account already exists with this email", new[] { "Email" });
+        }
+
+        public int AddClient()
+        {
+            var result = 0;
+            
+            using (var db = DbHelper.GetConnection())
+            {
+
+                if(CheckClientExists()==0)
                 {
                     //Insert new client information
                     string sql2 = "INSERT INTO Clients(FirstName,Surname,Email,Password,DateOfBirth) VALUES(@FirstName,@Surname,@Email,@Password,@DateOfBirth)";
