@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MovieApplication.Models
 {
-    public class Client
+    public class ApplicationUser
     {
         [Key]
-        public int Id { get; } 
+        public int Id { get; set; } 
         
         [Required]
         [StringLength(200, MinimumLength = 3)]
@@ -25,10 +25,14 @@ namespace MovieApplication.Models
         [EmailAddress]
         [Display(Name = "Email:")]
         public string Email { get; set; }
-        
+
+        [Required]
+        [EmailAddress]
+        public string NormalisedEmail { get; set; }
+
         [Required]
         [Display(Name = "Password:")]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
 
         [Required]
         [Display(Name = "Date of Birth:")]

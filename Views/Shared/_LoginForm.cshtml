@@ -1,0 +1,25 @@
+﻿@using (var form = Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.LoginVM.Email)
+        @Html.TextBoxFor(m => m.LoginVM.Email, new { @class = "form-control", placeholder = "Enter your email" })
+        @Html.ValidationMessageFor(m => m.LoginVM.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LoginVM.Password)
+        @Html.PasswordFor(m => m.LoginVM.Password, new { @class = "form-control", placeholder = "Enter your password", id = "loginPassword" })
+        @Html.ValidationMessageFor(m => m.LoginVM.Password)
+    </div>
+    <div class="form-group">
+        @Html.CheckBoxFor(m => m.LoginVM.RememberMe)
+        @Html.LabelFor(m => m.LoginVM.RememberMe)
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" id="loginShowPassword" type="checkbox"> Show Password
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

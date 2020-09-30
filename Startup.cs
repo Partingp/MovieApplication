@@ -5,8 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using ApplicationUser = MovieApplication.Models.ApplicationUser;
+using ApplicationRole = MovieApplication.Models.ApplicationRole;
+using UserStore = MovieApplication.Data.UserStore;
+using RoleStore = MovieApplication.Data.RoleStore;
 
 namespace MovieApplication
 {
@@ -17,6 +23,12 @@ namespace MovieApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IUserStore<ApplicationUser>, UserStore>();
+            services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddDefaultTokenProviders();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,6 +40,7 @@ namespace MovieApplication
             }
 
             app.UseRouting();
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {

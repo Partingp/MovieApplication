@@ -14,6 +14,8 @@ namespace MovieApplication.ViewModels
 
         public RegisterViewModel RegisterVM { get; set; }
 
+        public LoginViewModel LoginVM { get; set; }
+
     }
 }
 

@@ -1,6 +1,6 @@
-﻿@using (var form = Html.BeginForm("submitForm", "HomeController", FormMethod.Post))
+﻿@using (var form = Html.BeginForm("Register", "Home", FormMethod.Post))
 {
-
+    @Html.ValidationSummary();
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.FirstName)
         @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "form-control", placeholder = "Enter first name" })
@@ -23,7 +23,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.Password)
-        @Html.TextBoxFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Enter your password" })
+        @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Enter your password", id ="registerPassword" })
         @Html.ValidationMessageFor(m => m.RegisterVM.Password)
     </div>
     <div class="form-group">

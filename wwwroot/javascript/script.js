@@ -11,6 +11,14 @@
         $("#register").collapse("hide");
     });
 
+    $("#logoutButton").click(function () {
+        $.ajax({
+            url: 'Home/Logout',
+        }).done(function () {
+            location.reload(true);
+        });
+    });
+
     $("#registerButton").click(function () {
         $("#filters").collapse("hide");
         $("#login").collapse("hide");
@@ -21,7 +29,7 @@
     });
  
     var displayedPosterInfo = null;
-    $(document).on("click", '.poster', function () {
+    $(document).on("click", ".poster", function () {
         if ($("#movieInfo").is(":visible")) {
             $(".poster").removeClass("border-danger")
         }
@@ -54,23 +62,21 @@
     }
 
     //Display/Hide password 
-    $("#loginShowPassword").click(function () {
-        togglePasswordDisplay("#loginShowPassword", "#loginPassword");
+    $("#loginShowPassword").on("input",function () {
+        togglePasswordDisplay("loginPassword");
     });
 
-    $("#registerShowPassword").click(function () {
-        togglePasswordDisplay("#registerShowPassword", "#registerPassword");
+    $("#registerShowPassword").on("input",function () {
+        togglePasswordDisplay("registerPassword");
     });
 
-    function togglePasswordDisplay(selector, passwordId) {
-        $(selector).change(function () {
-            if ($(selector).is(":checked")) {
-                $(passwordId).attr("type", "text");
-            }
-            else {
-                $(passwordId).attr("type", "password");
-            }
-        });
+    function togglePasswordDisplay(selector) {
+        var x = document.getElementById(selector);
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
     }
 
 
@@ -78,7 +84,7 @@
     //const filters = document.querySelectorAll("#filters input[type='checkbox']");
     const filters = document.querySelectorAll("#filters label");
     for (var i = 0; i < filters.length; i++) {
-        filters[i].addEventListener('click', toggleFilter);
+        filters[i].addEventListener("click", toggleFilter);
     }
 
     function toggleFilter(e) {
