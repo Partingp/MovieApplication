@@ -1,6 +1,43 @@
-﻿
- @ViewBag.Synopsis
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@ViewBag.Synopsis
 <p>
     Info about the movie
 </p>
-<button>Get Tickets</button>
+<!--<button type="button" id="bookButton">Get Tickets</button>-->
+@{
+    var count = 1;
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    ViewBag.href = "/Home/Booking";
+}
+else
+{
+    ViewBag.href = "javascript:void(0)";
+}
+<div id="movieTimes" class="container">
+    <div id="times" class="row">
+        @foreach (var day in ViewBag.timetable)
+        {
+            <div class="col-sm-3">
+                <a id="cardLink" href=@ViewBag.href>
+                    <div id="detailsBox" class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">@day.DateTime.ToString("dd/MM")</h6>
+                            <p class="card-text dodgy">
+
+                                @day.DateTime.ToString("H:mm")
+                                @ViewBag.tags[0]
+                                £3.50
+                                @day.Screen
+
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

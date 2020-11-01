@@ -9,7 +9,7 @@ namespace MovieApplication.Models
     public class MovieItem
     {
         
-        public int Id { get; } 
+        public int MovieId { get; } 
         
         public string Title { get; set; }
         

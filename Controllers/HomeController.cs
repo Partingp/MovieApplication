@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MovieApplication.ViewModels;
+using MovieApplication.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
@@ -50,7 +51,13 @@ namespace MovieApplication.Controllers
                 movieInfo = viewModel.MovieItems.Find(x => x.Title == title);
 
                 ViewBag.Synopsis = movieInfo.Synopsis;
+                TempData["TitleId"] = movieInfo.MovieId;
             }
+
+            //Timetable Info
+            MoviesTimetableViewModel timetable = new MoviesTimetableViewModel();
+            ViewBag.timetable = timetable.getTimetable(title);
+            ViewBag.tags = timetable.getTags(title);
 
             return PartialView("_MovieInfo");
         }
@@ -141,13 +148,76 @@ namespace MovieApplication.Controllers
 
         }
 
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out");
             return RedirectToAction("Index", "Home");
         }
+
+        #region Booking methods
         
+        [Authorize]
+        public IActionResult Booking()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> getTakenSeats()
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            string id = await _userManager.GetUserIdAsync(user);
+            TempData["MovieId"] = (int)TempData["TitleId"];
+            TempData["UserId"] = id;
+
+            TempData.Keep("MovieId");
+            TempData.Keep("UserId");
+
+            Booking booking = new Booking
+            {
+                MovieTimeTableId = (int)TempData["MovieId"],
+                ApplicationUserId = (int)TempData["MovieId"]
+
+            };
+            string result = String.Join(",", booking.getTakenSeats().ToArray());
+            return Content(result);
+        }
+
+        public IActionResult submitSeats(string seatsParam)
+        {
+            if(!TempData.ContainsKey("MovieId") || !TempData.ContainsKey("UserId"))
+            {
+                return RedirectToAction("Booking");
+            }
+
+            Booking booking = new Booking 
+            {
+                MovieTimeTableId = (int) TempData["MovieId"],
+                ApplicationUserId = (int) TempData["MovieId"]
+
+            };
+
+            booking.setBooking(seatsParam.Split(','));
+
+
+            /*RESPONSE
+             * return JSON(Object containing transaction results)
+             * e.g. pass or failed
+             * time and date
+             * seats
+             * screen
+             * price
+             */
+            return Json("Success");
+        }
+
+
+        #endregion
+
+
+
         public void AddErrorsToModelState(IdentityResult result)
         {
             foreach(var error in result.Errors)

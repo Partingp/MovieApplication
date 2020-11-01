@@ -36,3 +36,12 @@ h1 {
     display:none;
     background-color: darkgrey;
 }
+
+.card{
+    min-width:50rem;
+}
+
+#cardLink *{
+    text-decoration:inherit;
+    color:inherit;
+}

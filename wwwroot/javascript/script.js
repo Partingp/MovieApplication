@@ -36,8 +36,15 @@
         showMovieInfo(this);
     });
 
+    $(document).on("click", '#cardLink', function () {
+        $("#loginButton").click();
+    });
+
     function showMovieInfo(poster) {
   
+        $("#login").collapse("hide");
+        $("#register").collapse("hide");
+        $("#filters").collapse("hide");
         $("#movieInfo").show().addClass("col-sm-3");
         $("#movieBrowse").removeClass("col-sm-12").addClass("col-sm-9");
         $(poster).toggleClass("border-danger");
@@ -79,7 +86,6 @@
         }
     }
 
-
     //Filtering of movies
     //const filters = document.querySelectorAll("#filters input[type='checkbox']");
     const filters = document.querySelectorAll("#filters label");
@@ -95,6 +101,7 @@
             $("#movieBrowse").html(partialViewResult);
         });
     }
+
 });
 
 

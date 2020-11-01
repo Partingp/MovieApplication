@@ -9,7 +9,7 @@ namespace MovieApplication.Models
     public class ApplicationUser
     {
         [Key]
-        public int Id { get; set; } 
+        public int Id { get; set;} 
         
         [Required]
         [StringLength(200, MinimumLength = 3)]

@@ -1,0 +1,44 @@
+﻿/*
+
+*/
+
+html, body, svg {
+    height: 100%
+}
+.seat{
+
+}
+
+#rowLabels svg{
+    background-color:black;
+}
+
+.seatUnavailable{
+   fill:red;
+}
+
+/*
+    Background-color for testing purposes
+    REMOVE ONCE LAYOUT IS COMPLETE
+*/
+#bookingLegend{
+    background-color:yellow;
+}
+
+#bookingInfo{
+    background-color:pink;
+}
+
+#screenLayout{
+    background-color:white;
+}
+
+.unavailable{
+    pointer-events: none;
+    cursor: default;
+   
+}
+
+.unavailable path{
+    fill:grey;
+}

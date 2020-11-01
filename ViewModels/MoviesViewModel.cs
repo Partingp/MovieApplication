@@ -23,13 +23,14 @@ namespace MovieApplication.ViewModels
         {
             using (var db = DbHelper.GetConnection())
             {
-                string sql = "SELECT * FROM Movies WHERE Title IN (SELECT Title FROM MovieTags WHERE Tag IN @Filters) ORDER BY ReleaseDate DESC";
-                //var parameters = new {Filters = new[] { filters } };
+                string sql = "SELECT * FROM MovieTags as mt " +
+                             "INNER JOIN Movies AS m ON (mt.MovieId=m.MovieId)" +
+                             "INNER JOIN Tags AS t ON (mt.TagId=t.TagId)" +
+                             "WHERE t.Tag IN @Filters ORDER BY ReleaseDate DESC";
                 var parameters = new {Filters = filters.Split(',') };
                 this.MovieItems = db.Query<MovieItem>(sql, parameters).ToList();
             }
         }
-
         public List<MovieItem> MovieItems { get; set; }
     }
 }
