@@ -41,7 +41,7 @@
             <button data-toggle="collapse" data-target="#login" id="loginButton">Login</button>
         }
         <!--Register form-->
-        <button data-toggle="collapse" data-target="#register" id="registerButton">Register</button>
+        <button id="registerButton">Register</button>
 
         <div id="filters" class="collapse">
             <h4>Filter by Screening Type</h4>
@@ -77,19 +77,9 @@
                 </label>
             </div>
         </div>
-
-        <!--Login form-->
-        <div id="login" class="collapse">
-            @await Html.PartialAsync("_LoginForm")
-        </div>
-
-        <!--Register form-->
-        <div id="register" class="collapse">
-            @await Html.PartialAsync("_RegisterForm")
-        </div>
     </nav>
     <main>
-        @if(SignInManager.IsSignedIn(User))
+        @if (SignInManager.IsSignedIn(User))
         {
             <p>Hello there @UserManager.GetUserName(User) </p>
         }
@@ -100,14 +90,21 @@
                 </div>
 
                 <!--Movie information-->
-                <div id="movieInfo" class="container-fluid col-sm-3 p-1">
+                <div id="movieInfo" class="container-fluid col-sm-3 p-1 panel">
 
+                </div>
+                <!--Register information-->
+                <div id="registerPanel" class="container-fluid col-sm-3 p-1 panel">
+                    @await Html.PartialAsync("_RegisterForm")
+                </div>
+                <!--Login information-->
+                <div id="loginPanel" class="container-fluid col-sm-3 p-1 panel">
+                    @await Html.PartialAsync("_LoginForm")
                 </div>
             </div>
         </div>
     </main>
     <footer>
     </footer>
-
 </body>
 </html>

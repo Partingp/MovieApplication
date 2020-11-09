@@ -12,9 +12,6 @@
         disableBookedSeats();
     });
 
-
-
-
     //Each entry in groups is a row
     //SVG event preperation
     var groups = document.getElementsByClassName("cinemaRow");
@@ -75,6 +72,7 @@
             data: { seatsParam: $("#selectedSeats").text() }
         }).done(function (result) {
             //Popup modal with booking details
+            $("#confirmation").modal('show');
         })
         .fail(function (result) {
              //Popup modal with error details e.g. seats taken, request timed out
@@ -91,7 +89,9 @@
     }
 
 
-
+    $('#confirmation').on('hidden.bs.modal', function (e) {
+        location.href = "/";
+    });
     //#endregion
 
 });

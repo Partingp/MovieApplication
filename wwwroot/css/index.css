@@ -32,7 +32,7 @@ h1 {
     text-shadow: 2px 2px forestgreen;
 }
 
-#movieInfo{
+.panel{
     display:none;
     background-color: darkgrey;
 }

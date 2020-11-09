@@ -3,7 +3,7 @@
     @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(m => m.LoginVM.Email)
-        @Html.TextBoxFor(m => m.LoginVM.Email, new { @class = "form-control", placeholder = "Enter your email" })
+        @Html.TextBoxFor(m => m.LoginVM.Email, new { @class = "form-control", placeholder = "Enter your email", autocomplete = "off" })
         @Html.ValidationMessageFor(m => m.LoginVM.Email)
     </div>
     <div class="form-group">

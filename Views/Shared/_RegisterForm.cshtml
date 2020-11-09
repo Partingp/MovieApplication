@@ -3,22 +3,22 @@
     @Html.ValidationSummary();
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.FirstName)
-        @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "form-control", placeholder = "Enter first name" })
+        @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "form-control", placeholder = "Enter first name", autocomplete = "off" })
         @Html.ValidationMessageFor(m => m.RegisterVM.FirstName)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.Surname)
-        @Html.TextBoxFor(m => m.RegisterVM.Surname, new { @class = "form-control", placeholder = "Enter surname" })
+        @Html.TextBoxFor(m => m.RegisterVM.Surname, new { @class = "form-control", placeholder = "Enter surname", autocomplete = "off" })
         @Html.ValidationMessageFor(m => m.RegisterVM.Surname)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.Email)
-        @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", placeholder = "Enter your email" })
+        @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", placeholder = "Enter your email", autocomplete = "off" })
         @Html.ValidationMessageFor(m => m.RegisterVM.Email)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.ConfirmEmail)
-        @Html.TextBoxFor(m => m.RegisterVM.ConfirmEmail, new { @class = "form-control", placeholder = "Enter your email again" })
+        @Html.TextBoxFor(m => m.RegisterVM.ConfirmEmail, new { @class = "form-control", placeholder = "Enter your email again", autocomplete = "off" })
         @Html.ValidationMessageFor(m => m.RegisterVM.ConfirmEmail)
     </div>
     <div class="form-group">
@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.DateOfBirth)
-        @Html.TextBoxFor(m => m.RegisterVM.DateOfBirth, new { @class = "form-control", placeholder = "Enter your date of birth", @type = "date" })
+        @Html.TextBoxFor(m => m.RegisterVM.DateOfBirth, new { @class = "form-control", placeholder = "Enter your date of birth", @type = "date", autocomplete = "off" })
         @Html.ValidationMessageFor(m => m.RegisterVM.DateOfBirth)
     </div>
     <div class="form-group form-check">

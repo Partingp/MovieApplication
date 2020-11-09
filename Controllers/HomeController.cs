@@ -17,7 +17,6 @@ namespace MovieApplication.Controllers
 {
     public class HomeController : Controller
     {
-        public static HashSet<string> filters = new HashSet<string>();
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
@@ -40,7 +39,7 @@ namespace MovieApplication.Controllers
             return View(viewModel);
         }
 
-        [Route("movie/{slug}")]
+        [Route("movie/{title}")]
         public IActionResult getMovieInfo(string title)
         {
             MoviesViewModel viewModel = new MoviesViewModel();
@@ -64,32 +63,20 @@ namespace MovieApplication.Controllers
 
 
         [Route("movie/filterMovies")]
-        public IActionResult filterMovies(string filter, MoviesViewModel viewModel)
+        public IActionResult filterMovies(string filters, MoviesViewModel viewModel)
         {
             IndexCommonViewModel commonViewModel = new IndexCommonViewModel();
             commonViewModel.MoviesVM = viewModel;
 
-            //Add/Remove filter
-            if (!filters.Add(filter))
-            {
-                filters.Remove(filter);
-            }
 
-            //Generate CSV string of filters
-            string enabledFilters = "";
-            foreach (string f in filters) {
-                enabledFilters += f + ',';
-            }
-            enabledFilters = enabledFilters.TrimEnd(',');
-
-            if (String.IsNullOrEmpty(enabledFilters))
+            if (String.IsNullOrEmpty(filters))
             {
                 commonViewModel.MoviesVM = new MoviesViewModel();
                 return PartialView("_MovieBrowse", commonViewModel);
             }
             else
             {
-                viewModel.getFilteredMovies(enabledFilters);
+                viewModel.getFilteredMovies(filters);
                 return PartialView("_MovieBrowse", commonViewModel);
             }
 
@@ -171,6 +158,7 @@ namespace MovieApplication.Controllers
             string id = await _userManager.GetUserIdAsync(user);
             TempData["MovieId"] = (int)TempData["TitleId"];
             TempData["UserId"] = id;
+            TempData["TitleId"] = TempData["MovieId"];
 
             TempData.Keep("MovieId");
             TempData.Keep("UserId");
@@ -185,6 +173,7 @@ namespace MovieApplication.Controllers
             return Content(result);
         }
 
+        [Authorize]
         public IActionResult submitSeats(string seatsParam)
         {
             if(!TempData.ContainsKey("MovieId") || !TempData.ContainsKey("UserId"))
