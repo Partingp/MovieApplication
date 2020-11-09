@@ -1,4 +1,7 @@
-﻿@using (var form = Html.BeginForm("Register", "Home", FormMethod.Post))
+﻿<button id="registerClose" type="button" class="close"  aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+@using (var form = Html.BeginForm("Register", "Home", FormMethod.Post))
 {
     @Html.ValidationSummary();
     <div class="form-group">
@@ -23,7 +26,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterVM.Password)
-        @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Enter your password", id ="registerPassword" })
+        @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Enter your password", id = "registerPassword" })
         @Html.ValidationMessageFor(m => m.RegisterVM.Password)
     </div>
     <div class="form-group">

@@ -23,7 +23,7 @@
     });
 
     $(document).on("click", '#movieInfo', function () {
-        hideMovieInfo();
+        hidePanel("#movieInfo");
     });
  
     var displayedPosterInfo = null;
@@ -38,8 +38,15 @@
         $("#loginButton").click();
     });
 
+    $(document).on("click", '#registerClose', function () {
+        hidePanel("#registerPanel");
+    });
+
+    $(document).on("click", '#loginClose', function () {
+        hidePanel("#loginPanel");
+    });
+
     function togglePanels(id) {
-        //$("#filters").collapse("hide");
         $(".poster").removeClass("border-danger")
         $(".panel").hide().removeClass("col-sm-3");
         var selector = id + ".panel";
@@ -47,8 +54,9 @@
         $("#movieBrowse").removeClass("col-sm-12").addClass("col-sm-9");
     }
 
-    function hideMovieInfo() {
-        $("#movieInfo").hide().removeClass("col-sm-3");
+
+    function hidePanel(id) {
+        $(id).hide().removeClass("col-sm-3");
         $("#movieBrowse").removeClass("col-sm-9").addClass("col-sm-12");
         $(".border").removeClass("border-danger");
     }

@@ -55,7 +55,7 @@
         }
         else {
             selectedSeats.add(e.delegateTarget.id);
-            $(e.delegateTarget).find("path").attr("fill", "red");
+            $(e.delegateTarget).find("path").attr("fill", "white");
         }
         var selectedSeatString = [...selectedSeats].join(',');
         $("#selectedSeats").text(selectedSeatString);

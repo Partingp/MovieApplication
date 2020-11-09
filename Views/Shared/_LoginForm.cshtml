@@ -1,4 +1,7 @@
-﻿@using (var form = Html.BeginForm("Login", "Home", FormMethod.Post))
+﻿<button id="loginClose" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+@using (var form = Html.BeginForm("Login", "Home", FormMethod.Post))
 {
     @Html.ValidationSummary()
     <div class="form-group">

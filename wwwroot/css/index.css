@@ -1,9 +1,11 @@
-﻿body {
+﻿
+body {
     display: grid;
+    background-image: linear-gradient(to right, hsl(120, 100%, 25%), black);
 }
 
-.header {
-    background-color: forestgreen;
+.close{
+    color:white !important;
 }
 
 #login {
@@ -15,16 +17,12 @@
     height:auto;
 }
 
-main {
-    background-color:yellow;
+.caption{
+    color: white;
 }
 
-#movieContent{
-    background-color:black;
-}
-
-footer {
-    background-color: aqua;
+.jumbotron {
+    background-image: linear-gradient(to right, hsl(120, 100%, 25%), black);
 }
 
 h1 {
@@ -32,9 +30,10 @@ h1 {
     text-shadow: 2px 2px forestgreen;
 }
 
-.panel{
-    display:none;
-    background-color: darkgrey;
+.panel {
+    display: none;
+    background-color: black;
+    color: white;
 }
 
 .card{

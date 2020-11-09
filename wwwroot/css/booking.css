@@ -3,34 +3,20 @@
 */
 
 html, body, svg {
-    height: 100%
-}
-.seat{
-
+    height: 100%;
 }
 
-#rowLabels svg{
-    background-color:black;
+
+body{
+    display: grid;
 }
 
-.seatUnavailable{
-   fill:red;
+#bookingSvg{
+    background-color:darkgrey;
 }
 
-/*
-    Background-color for testing purposes
-    REMOVE ONCE LAYOUT IS COMPLETE
-*/
-#bookingLegend{
-    background-color:yellow;
-}
-
-#bookingInfo{
-    background-color:pink;
-}
-
-#screenLayout{
-    background-color:white;
+#bookingInfo, #bookingLegend {
+    background-image: linear-gradient(to right, hsl(120, 100%, 25%), black);
 }
 
 .unavailable{
@@ -40,5 +26,5 @@ html, body, svg {
 }
 
 .unavailable path{
-    fill:grey;
+    fill:red;
 }

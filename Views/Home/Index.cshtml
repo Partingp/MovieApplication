@@ -22,13 +22,12 @@
     <script src="~/javascript/script.js"></script>
 </head>
 <body>
-    <header>
-        <div class="jumbotron">
-            <h1> <b>Uve</b> </h1>
-        </div>
 
-    </header>
-    <nav>
+    <div class="jumbotron">
+        <h1> <b>Uve</b> </h1>
+
+
+
         <!--Filters menu-->
         <button data-toggle="collapse" data-target="#filters" id="filtersButton">Filters</button>
         @if (SignInManager.IsSignedIn(User))
@@ -46,16 +45,16 @@
         <div id="filters" class="collapse">
             <h4>Filter by Screening Type</h4>
             <div class="btn-group-toggle" data-toggle="buttons">
-                <label id="3D" class="btn btn-outline-dark ">
+                <label id="3D" class="btn btn-outline-light ">
                     <input type="checkbox" autocomplete="off"> 3D
                 </label>
-                <label id="2D" class="btn btn-outline-dark">
+                <label id="2D" class="btn btn-outline-light">
                     <input type="checkbox" autocomplete="off"> 2D
                 </label>
-                <label id="4K" class="btn btn-outline-dark ">
+                <label id="4K" class="btn btn-outline-light ">
                     <input type="checkbox" autocomplete="off"> 4K
                 </label>
-                <label id="Audio Description" class="btn btn-outline-dark ">
+                <label id="Audio Description" class="btn btn-outline-light ">
                     <input type="checkbox" autocomplete="off"> Audio Description (AD)
                 </label>
             </div>
@@ -63,48 +62,44 @@
 
             <h4>Filter by Genre</h4>
             <div class="btn-group-toggle" data-toggle="buttons">
-                <label id="Comedy" class="btn btn-outline-dark ">
+                <label id="Comedy" class="btn btn-outline-light ">
                     <input type="checkbox" autocomplete="off"> Comedy
                 </label>
-                <label id="Documentary" class="btn btn-outline-dark">
+                <label id="Documentary" class="btn btn-outline-light">
                     <input type="checkbox" autocomplete="off"> Documentary
                 </label>
-                <label id="Sci-Fi" class="btn btn-outline-dark ">
+                <label id="Sci-Fi" class="btn btn-outline-light ">
                     <input type="checkbox" autocomplete="off"> Sci-Fi
                 </label>
-                <label id="Thriller" class="btn btn-outline-dark ">
+                <label id="Thriller" class="btn btn-outline-light ">
                     <input type="checkbox" autocomplete="off"> Thriller
                 </label>
             </div>
         </div>
-    </nav>
-    <main>
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <p>Hello there @UserManager.GetUserName(User) </p>
-        }
-        <div id="movieContent" class="container-fluid p-0">
-            <div class="row no-gutters">
-                <div id="movieBrowse" class="container-fluid col-sm-12 order-1 p-1">
-                    @await Html.PartialAsync("_MovieBrowse")
-                </div>
+    </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <p>Hello there @UserManager.GetUserName(User) </p>
+    }
+    <div id="movieContent" class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div id="movieBrowse" class="container-fluid col-sm-12 order-1 p-1">
+                @await Html.PartialAsync("_MovieBrowse")
+            </div>
 
-                <!--Movie information-->
-                <div id="movieInfo" class="container-fluid col-sm-3 p-1 panel">
+            <!--Movie information-->
+            <div id="movieInfo" class="container-fluid col-sm-3 p-1 panel">
 
-                </div>
-                <!--Register information-->
-                <div id="registerPanel" class="container-fluid col-sm-3 p-1 panel">
-                    @await Html.PartialAsync("_RegisterForm")
-                </div>
-                <!--Login information-->
-                <div id="loginPanel" class="container-fluid col-sm-3 p-1 panel">
-                    @await Html.PartialAsync("_LoginForm")
-                </div>
+            </div>
+            <!--Register information-->
+            <div id="registerPanel" class="container-fluid col-sm-3 p-1 panel">
+                @await Html.PartialAsync("_RegisterForm")
+            </div>
+            <!--Login information-->
+            <div id="loginPanel" class="container-fluid col-sm-3 p-1 panel">
+                @await Html.PartialAsync("_LoginForm")
             </div>
         </div>
-    </main>
-    <footer>
-    </footer>
+    </div>
 </body>
 </html>
